@@ -33,4 +33,5 @@ Small note: If editing the Readme, please conform to the [standard-readme](https
 
 ## License
 
+SHell script from: https://gist.github.com/m14t/3056747
 MIT © Richard Littauer
