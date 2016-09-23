@@ -5,6 +5,8 @@ REPO_URL=`git remote -v | grep -m1 '^origin' | sed -Ene's#.*(https://[^[:space:]
 if [ -z "$REPO_URL" ]; then
   echo "-- ERROR:  Could not identify Repo url."
   echo "   It is possible this repo is already using SSH instead of HTTPS."
+  echo "   Current origin:"
+  echo "$(git remote -v |  grep -m1 '^origin')"
   exit
 fi
 
