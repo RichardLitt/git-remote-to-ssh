@@ -1,6 +1,6 @@
 {
   "name": "github-origin-https-to-ssh",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convert GitHub origin urls from HTTPS to SSH",
   "bin": {
     "https-to-ssh": "index.js"
