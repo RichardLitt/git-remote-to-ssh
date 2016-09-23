@@ -1,0 +1,27 @@
+{
+  "name": "github-origin-https-to-ssh",
+  "version": "1.0.0",
+  "description": "Convert GitHub origin urls from HTTPS to SSH",
+  "scripts": {
+    "run": ". ./fix_github_https_repo.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richardlitt/github-origin-https-to-ssh.git"
+  },
+  "keywords": [
+    "github",
+    "ssh",
+    "origin",
+    "https",
+    "remote",
+    "set-url",
+    "url"
+  ],
+  "author": "Richard Littauer <richard.littauer@gmail.com> (http://burntfen.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/richardlitt/github-origin-https-to-ssh/issues"
+  },
+  "homepage": "https://github.com/richardlitt/github-origin-https-to-ssh#readme"
+}
