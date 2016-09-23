@@ -3,11 +3,7 @@
   "version": "1.0.5",
   "description": "Convert GitHub origin urls from HTTPS to SSH",
   "bin": {
-    "https-to-ssh": "index.js"
-  },
-  "main": "index.js",
-  "scripts": {
-    "run": ". ./fix_github_https_repo.sh"
+    "https-to-ssh": "fix_github_https_repo.sh"
   },
   "repository": {
     "type": "git",
@@ -28,10 +24,7 @@
     "url": "https://github.com/richardlitt/github-origin-https-to-ssh/issues"
   },
   "homepage": "https://github.com/richardlitt/github-origin-https-to-ssh#readme",
-  "dependencies": {
-    "fs": "0.0.1-security",
-    "shelljs": "^0.7.4"
-  },
+  "dependencies": {},
   "coordinates": [
     42.3803274,
     -71.13891009999999
