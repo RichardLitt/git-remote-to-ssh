@@ -30,7 +30,7 @@ if [ -z "$REPO" ]; then
   exit
 fi
 
-NEW_URL="git@$GIT_DOMAIN:$USER/$REPO.git"
+NEW_URL=`echo git@$GIT_DOMAIN:$USER/$REPO.git | sed -e 's/\.git\.git/.git/g'`
 echo "Changing repo url from "
 echo "  '$REPO_URL'"
 echo "      to "
