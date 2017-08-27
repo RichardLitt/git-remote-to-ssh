@@ -1,6 +1,6 @@
 {
   "name": "git-remote-to-ssh",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "description": "Convert GitHub origin urls from HTTPS to SSH",
   "bin": "index.js",
   "repository": {
