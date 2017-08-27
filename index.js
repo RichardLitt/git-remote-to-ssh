@@ -1,60 +1,41 @@
 #!/usr/bin/env node
-const execa = require('execa')
 const meow = require('meow')
+const parse = require('parse-git-config')
+const hostedGitInfo = require("hosted-git-info")
+const simpleGit = require('simple-git')
 
 const cli = meow(`
     Usage
-      $ https-to-ssh <input>
+      $ git-remote-to-ssh <input>
 
     Options
-      -d, --domain  Specify a different domain (for Enterprise)
       -r, --remote  Specify a different remote
 
     Examples
-      $ foo unicorns --domain github.corp.org
-      🌈 unicorns 🌈
+      $ git-remote-to-ssh
+      Remote origin: git@github.com:RichardLitt/git-remote-to-ssh.git
+      $ git-remote-to-ssh -r test
+      Remote test: git@github.com:RichardLitt/whatever.git
 `, {
-    alias: {
-        d: 'domain',
-        r: 'remote'
-    }
+  alias: {
+    r: 'remote'
+  }
 })
 
-// foo(cli.input[0], cli.flags);
+const opts = {
+  remote: cli.flags.remote || 'origin'
+}
 
-const domain = cli.flags.domain || 'github.com'
-const remote = cli.flags.remote || 'origin'
-
-execa(`git remote -v | grep -m1 '^${remote}' | sed -Ene's#.*(https://[^[:space:]]*).*#\1#p'`)
-  .then((repoURL) => {
-    return execa(`echo ${repoURL} | sed -Ene's#https://'${domain}'/([^/]*)/(.*).*#\1#p'`)
-      .then((user) => {
-        return execa(`echo ${repoURL} | sed -Ene's#https://'${domain}'/([^/]*)/(.*).*#\2#p'`)
-          .then((repo) => {
-            return execa(`echo git@$domain:${user}/${repo}.git | sed -e 's/\.git\.git/.git/g'`)
-              .then((newURL) => {
-                console.log(`Changing repo url from
-  '${repoURL}'
-      to
-  '${newURL}'
-`)
-                return execa(`git remote set-url ${remote} ${newURL}`)
-                  .then(res => console.log('Success'))
-                  .catch((err) => { console.log('Unable to change at last moment')})
-              })
-              .catch()
-          })
-          .catch(err => {
-            console.log("-- ERROR:  Could not identify Repo.")
-          })
-      }).catch(err => {
-        console.log("-- ERROR:  Could not identify User.")
-      })
-  }).catch((err) => {
-    console.log(`-- ERROR:  Could not identify Repo url.
-  It is possible this repo is already using SSH instead of HTTPS.
-  Current remote ${remote}:
-  ${execa(`git remote -v |  grep -m1 '^${remote}')`)
-    .then(res => console.log(res))}
-    `)
-  })
+// Get the .gitconfig file as a JSON object
+var config = parse.sync();
+// Show me the remote
+var oldURL = config[`remote "${opts.remote}"`].url
+// TODO What if the remote is bogus?
+var info = hostedGitInfo.fromUrl(oldURL)
+// Convert to ssh
+var newURL = info.ssh()
+// Set the URL using git
+simpleGit().remote(['set-url', opts.remote, newURL], (err, res) => {
+  if (err) console.log('All hell broke loose ' + err)
+  console.log(`Remote ${opts.remote}: ${newURL}`)
+})

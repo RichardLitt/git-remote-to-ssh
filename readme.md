@@ -1,30 +1,29 @@
-# github-origin-https-to-ssh
+# git-remote-to-ssh
 
-> Automatically convert GitHub origin urls from https to ssh
-
-This is an evil shell script that really ought to be done in Javascript with better checks.
+> Automatically convert GitHub origin URLs to the ssh protocol
 
 ## Install
 
 ```
-npm i -g github-origin-https-to-ssh
+npm i -g git-remote-to-ssh
 ```
 
 ## Usage
 
-This has been aliased as `https-to-ssh`.
+This has been aliased as `git-ssh`.
 
 ```sh
-# In git repo with bad URL
-$ https-to-ssh
-## All fixed.
-```
+Usage
+  $ git-remote-to-ssh <input>
 
-This also works for enterprise or non-GitHub git remotes.
+Options
+  -r, --remote  Specify a different remote
 
-```sh
-$ https-to-ssh github.corporation.org
-## All fixed for enterprise
+Examples
+  $ git-remote-to-ssh
+  Remote origin: git@github.com:RichardLitt/git-remote-to-ssh.git
+  $ git-remote-to-ssh -r test
+  Remote test: git@github.com:RichardLitt/whatever.git
 ```
 
 ## Contribute
@@ -33,5 +32,4 @@ Issues and PRs accepted.
 
 ## License
 
-Shell script from: https://gist.github.com/m14t/3056747
 [MIT](LICENSE) © Richard Littauer 2017
