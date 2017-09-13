@@ -1,5 +1,7 @@
 # git-remote-to-ssh
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/RichardLitt/git-remote-to-ssh.svg)](https://greenkeeper.io/)
+
 > Automatically convert GitHub origin URLs to the ssh protocol
 
 ## Install
